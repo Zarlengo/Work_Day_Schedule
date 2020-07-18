@@ -24,12 +24,35 @@
 
   <body>
     <header class="jumbotron">
+      <i class="fas fa-cog settings"></i>
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
+    </div>
+
+    <div id="settings_modal" class="modal">
+      <div class="modal-content">
+        <i class="fas fa-times-circle close"></i>
+        <table class="option"><tbody>
+          <tr>
+            <td><label for="start">Start time:</label></td>
+            <td><select name="times" id="start"></select></td>
+          </tr>
+          <tr>
+            <td><label for="end">End time:</label></td>
+            <td><select name="times" id="end"></select></td>
+          </td></tr>
+          <tr>
+            <td><label for="hour_format">Hour format:</label></td>
+            <td><select name="hours" id="hour_format"></select></td>
+          </tr>
+        </tbody></table>
+        <!-- <p>Work week:</p> -->
+      </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
