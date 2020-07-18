@@ -151,7 +151,6 @@ function load_day() {
 
     // Gets the current hour from the browser
     let current_hour = moment().hour();
-
     // Updates the html with the target date
     document.querySelector("#currentDay").innerText = target_date.format("dddd, MMMM Do");
     
