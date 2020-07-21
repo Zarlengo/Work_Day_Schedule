@@ -28,31 +28,35 @@ body {
 /******  header settings  ******/
 /*  Formatting for the nav bar */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    padding: 0px 15px 0px 15px;
-    z-index: 100;
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  padding: 0px 15px 0px 15px;
+  z-index: 100;
+  display: none;
+  flex-direction: row;
+  color: #FFF;
 }
+
 
 /***** Open settings button *****/
-.settings, .refresh {
+.selectors {
   cursor:pointer;
-  color: #FFF;
+  color: inherit;
   padding: 0 10px 0 10px;
-}
-
-.input-group {
-  display: inline;
+  font-size: 30px;
 }
 
 /***** Introduction themes *****/
+.icon-head {
+  color: #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+}
+
 .jumbotron {
   text-align: center;
   background-color: transparent;

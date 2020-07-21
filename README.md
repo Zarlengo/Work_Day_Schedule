@@ -21,7 +21,12 @@
 
 Mouse down and hold or touch and hold on the move button allows the movement of a row to another location. Swaps the information between the two locations. Saving will add the data to local storage (Not saving the "from" location will create a copy of the event to a new location)
 
+## Navbar
+![Example](./Assets/navbar.jpg)
+
+For smaller screens (where the date in the introduction is no longer visible on scrolling) a navbar will appear when scrolling down.
 
 ## Additional Features
 * Preferences are configurable by the user, saved to local storage and applied immediately to the screen
 * Unsaved changes are identified with orange background which is removed upon save
+* Refresh button will reload schedule from local storage

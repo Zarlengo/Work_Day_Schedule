@@ -94,6 +94,7 @@ function load_settings() {
 
     // Adds some listeners to the setting button and close button
     document.querySelector(".settings").addEventListener("click", function () {document.querySelector("#settings_modal").style.display = "block";}, false);
+    document.querySelector(".settings-head").addEventListener("click", function () {document.querySelector("#settings_modal").style.display = "block";}, false);
     document.querySelector(".close").addEventListener("click", function () {document.querySelector("#settings_modal").style.display = "none";}, false);
 
     // In case the user tries to click outside the modal to close
@@ -132,17 +133,17 @@ function update_settings() {
 
 // Function to show / hide the navbar based on location of the user on the page
 window.addEventListener("scroll", function() {
-  if (window.pageYOffset > 330) {
-    document.querySelector(".navbar").style.display = "flex";
-  } else {
-    document.querySelector(".navbar").style.display = "none";
-  }
+    let navbar = document.querySelector(".navbar");
+    if (window.pageYOffset > 330) {
+        navbar.style.display = "flex";
+    } else {
+        navbar.style.display = "none";
+    }
 });
-
-
 
 // Handler to reload the hour blocks from local storage
 document.querySelector(".refresh").addEventListener("click", load_day, false);
+document.querySelector(".refresh-head").addEventListener("click", load_day, false);
 
 // Function to load the work day
 function load_day() {
