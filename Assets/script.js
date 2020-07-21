@@ -1,9 +1,3 @@
-// Todo list
-// Header/Nav bar show on scroll (include short date and settings button)
-// Option for repeat events
-// Change date
-// Add refresh button
-
 // Initialize global variables
 let settings;
 let date_code;
@@ -20,7 +14,7 @@ function init() {
     // Checks for initial run in browser and loads default settings to storage
     if (settings === null) {
         // Default values
-        settings = {        
+        settings = {
             start: 9,                   // 9:00
             end: 18,                    // 18:00
             hour_format: 12,            // 12 or 24 hour formatting
@@ -67,7 +61,7 @@ function load_settings() {
             } else {
                 time_string = `${i - 12} PM`;
             }
-        } else {    
+        } else {
             time_string = `${i}:00`;
         }
 
@@ -92,7 +86,7 @@ function load_settings() {
         hour_format_string = `<option value="12">12 Hours (AM/PM)</option><option value="24" selected>24 Hours (00:00)</option>`;
     }
     document.querySelector("#hour_format").innerHTML = hour_format_string;
-        
+
     // Adds some listeners to the settings modal to trigger when a change is requested
     document.querySelector("#start").addEventListener("change", update_settings, false);
     document.querySelector("#end").addEventListener("change", update_settings, false);
@@ -110,7 +104,6 @@ function load_settings() {
     }, false)
 }
 load_settings();
-
 
 // Function to update the preferences in local storage upon change
 function update_settings() {
@@ -137,7 +130,19 @@ function update_settings() {
     load_day();
 }
 
+// Function to show / hide the navbar based on location of the user on the page
+window.addEventListener("scroll", function() {
+  if (window.pageYOffset > 330) {
+    document.querySelector(".navbar").style.display = "flex";
+  } else {
+    document.querySelector(".navbar").style.display = "none";
+  }
+});
 
+
+
+// Handler to reload the hour blocks from local storage
+document.querySelector(".refresh").addEventListener("click", load_day, false);
 
 // Function to load the work day
 function load_day() {
@@ -153,7 +158,8 @@ function load_day() {
     let current_hour = moment().hour();
     // Updates the html with the target date
     document.querySelector("#currentDay").innerText = target_date.format("dddd, MMMM Do");
-    
+    document.querySelector("#navbar-date").innerText = target_date.format("dddd, MMMM Do");
+
     // Checks local storage for data for the given day
     day_data = JSON.parse(localStorage.getItem(date_code));
 
@@ -164,7 +170,7 @@ function load_day() {
 
     // Cycles through each hour in the schedule
     for (hour_block = settings.start; hour_block < settings.end; hour_block++) {
-   
+
         // Checks if the cell should be colored past / present / future
         if (hour_block < current_hour) {
             past_future = "past";
@@ -191,7 +197,7 @@ function load_day() {
         row.innerHTML = `<div class="col-1-xs hour">${time_format(hour_block)}</div>
                         <div class="col ${past_future}"><textarea class="appointment" value=${day_text}>${day_text}</textarea></div>
                         <div class="col-1-xs dragBtn" data-id="${hour_block}"><div class="row icons"><i class="fas fa-bars"></i></div></div>
-                        <div class="col-1-xs saveBtn" data-id="${hour_block}"><div class="row icons"><i class="fas fa-save"></i></div></div>`;    
+                        <div class="col-1-xs saveBtn" data-id="${hour_block}"><div class="row icons"><i class="fas fa-save"></i></div></div>`;
 
         // Adds the new hour to the main page
         container.appendChild(row);
@@ -203,27 +209,26 @@ function load_day() {
 
         // Add draggable to each row upon click of the drag icon
         document.querySelectorAll(".dragBtn").forEach(function (btn) {
-            btn.addEventListener('mousedown', function (event) {
+            btn.addEventListener("mousedown", function (event) {
                 document.querySelector(`#time_${this.getAttribute("data-id")}`).setAttribute("draggable", "true");
             });
 
             // Desktop versions
-            btn.addEventListener('mouseout', function (event) {
-                document.querySelector(`#time_${this.getAttribute("data-id")}`).removeAttribute('draggable');
+            btn.addEventListener("mouseout", function (event) {
+                document.querySelector(`#time_${this.getAttribute("data-id")}`).removeAttribute("draggable");
             });
 
-            btn.addEventListener('touchstart', function (event) {
+            btn.addEventListener("touchstart", function (event) {
                 event.preventDefault();
                 target_element = document.querySelector(`#time_${this.getAttribute("data-id")}`);
 
                 touch_start = true;
                 target_element.style.opacity = 0.33;
                 target_data = target_element.querySelector(".appointment").value;
-                
             });
 
             // Touchscreen versions
-            btn.addEventListener('touchend', function (event) {
+            btn.addEventListener("touchend", function (event) {
                 touch_start = false;
                 let last_outlined = document.querySelectorAll(".new_spot");
                 if (last_outlined.length == 1) {
@@ -233,7 +238,7 @@ function load_day() {
                         last_outlined[0].querySelector(".appointment").classList.add("changed");
                         target_element.querySelector(".appointment").classList.add("changed");
                     }
-                }               
+                }
                 let all_hours = document.querySelectorAll(".hour_block");
                 all_hours.forEach(function(row) {
                     row.classList.remove("new_spot");
@@ -255,7 +260,7 @@ function load_day() {
         // Add input change listeners to each meeting to designate unsaved changes
         let all_appointments = document.querySelectorAll(".appointment");
         all_appointments.forEach(function(appointment) {
-            appointment.addEventListener('input', function() {
+            appointment.addEventListener("input", function() {
                 this.classList.add("changed");
             }, false);
         });
@@ -265,7 +270,7 @@ function load_day() {
 
 
 // Gets the current date from the browser
-let current_date = moment().startOf('day');
+let current_date = moment().startOf("day");
 
 // Date Code to use in local storage to reference the specific day
 date_code = current_date.format("YMMDD");
@@ -310,7 +315,7 @@ function save_row(event) {
     text_save = parent_element.querySelector(".appointment").value;
     parent_element.querySelector(".appointment").classList.remove("changed");
     hour_save = parent_element.getAttribute("data-id");
-       
+
     if (text_save == "") {
         // If there is no data in the textarea, delete from local storage
         delete_item(hour_save);
@@ -405,16 +410,16 @@ function handleDrop(event) {
 
 /****** Touchscreen versions ******/
 // Adds a listener to the touch move event
-document.addEventListener('touchmove', function (event) {
+document.addEventListener("touchmove", function (event) {
     // Checks if the drag originated from the drag icon
     if (!touch_start) return;
-    
+
     // Stores the elements that the finger is touching
     var element = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
     if (!element) return;
 
     // Checks the element tree for a match to a row
-    if (element.matches('.hour_block')) {
+    if (element.matches(".hour_block")) {
 
         // Removes outlines from all rows
         let all_hours = document.querySelectorAll(".hour_block");

@@ -23,8 +23,14 @@
   </head>
 
   <body>
-    <header class="jumbotron">
-      <i class="fas fa-cog settings"></i>
+    <nav class="navbar navbar-dark bg-dark w-100" id="navbar">
+      <span class="navbar-brand mb-0 h1" id="navbar-date">Navbar</span>
+      <div class="icon">
+        <i class="fas fa-sync refresh"></i>
+        <i class="fas fa-cog settings"></i>
+      </div>
+    </nav>
+    <header class="jumbotron">	
       <h1 class="display-3">Work Day Scheduler</h1>
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
@@ -44,7 +50,7 @@
           <tr>
             <td><label for="end">End time:</label></td>
             <td><select name="times" id="end"></select></td>
-          </td></tr>
+          </tr>
           <tr>
             <td><label for="hour_format">Hour format:</label></td>
             <td><select name="hours" id="hour_format"></select></td>
