@@ -1,4 +1,4 @@
-# Work Day Scheduler
+# [Work Day Scheduler](https://zarlengo.github.io/Work_Day_Schedule/)
 
 
 ## User Settings
@@ -18,6 +18,7 @@
 
 ## Drag and Drop
 ![Example](./Assets/drag_drop.gif)
+
 Mouse down and hold or touch and hold on the move button allows the movement of a row to another location. Swaps the information between the two locations. Saving will add the data to local storage (Not saving the "from" location will create a copy of the event to a new location)
 
 
